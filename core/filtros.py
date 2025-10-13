@@ -1,48 +1,55 @@
 #Buscar un país por nombre (coincidencia parcial o exacta);
 def buscar_por_nombre(paises, buscar, coincide=False): 
-    resultado = []
+    paises_encontrados = []
     buscar = buscar.strip().lower()
+    resultado = ''
     
     for pais in paises:
         nombre = pais.get("nombre").lower()
         if coincide: #Coincidencia exacta
             if nombre == buscar:
-                resultado.append(pais)
+                paises_encontrados.append(pais)
         else: #Coincidencia parcial
             if buscar in nombre:
-                resultado.append(pais)         
-    if not resultado:
-        print(f"No se encontraron países que coincidan con '{buscar}'.")
+                paises_encontrados.append(pais)         
+    if not paises_encontrados:
+        resultado = f"No se encontraron países que coincidan con '{buscar}'."
     else:
-        print(f"Se encontraron {len(resultado)} país(es) que coinciden con '{buscar}':")
-        for p in resultado:
-            print(f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}")
-
+        resultado = f"Se encontraron {len(paises_encontrados)} país(es) que coinciden con '{buscar}':\n"
+        for p in paises_encontrados:
+            resultado += f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}\n"
     return resultado
 
 #Filtrar paises por continente;
 def filtrar_por_continente(paises, continente):
     continente = continente.strip().lower()
-    resultado = []
+    paises_filtrados = []
+    resultado = ''
     
     for pais in paises:
         cont = pais.get("continente").lower()
-        if cont == continente:
-            resultado.append(pais)
+        if continente in cont:
+            paises_filtrados.append(pais)
 
-    if not resultado:
-        print(f"No se encontraron países en el continente '{continente}'.")
+    if not paises_filtrados:
+        resultado = f"No se encontraron países en el continente '{continente}'."
     else:
-        print(f"Se encontraron {len(resultado)} país(es) en el continente '{continente}':")
-        for p in resultado:
-            print(f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}")
-    
+        resultado = f"Se encontraron {len(paises_filtrados)} país(es) en el continente '{continente}':\n"
+        for p in paises_filtrados:
+            resultado += f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}\n"           
     return resultado
 
 #Filtrar paises por poblacion;
 
-def filtrar_por_poblacion(paises, min_pop=0, max_pop=-1):
-    resultado = []
+def filtrar_por_poblacion(paises, min_pop, max_pop):
+    min_pop = int(min_pop)
+    max_pop = int(max_pop)
+    paises_filtrados = []
+    resultado = ''
+    
+    if max_pop < min_pop:
+        min_pop, max_pop = max_pop, min_pop
+    
     for pais in paises:
         poblacion = pais.get("poblacion")
         #Garantizar que el valor sea numerico y valido
@@ -50,22 +57,28 @@ def filtrar_por_poblacion(paises, min_pop=0, max_pop=-1):
             continue
         poblacion = int(poblacion)
 
-        if (poblacion >= min_pop) and (max_pop == -1 or poblacion <= max_pop):
-            resultado.append(pais)
+        if min_pop <= poblacion <= max_pop:
+            paises_filtrados.append(pais)
 
-    if not resultado:
-        print(f"No se encontraron países con población entre {min_pop} y {max_pop}.")
+    if not paises_filtrados:
+        resultado = f"No se encontraron países con población entre {min_pop} y {max_pop}.\n"
     else:
-        print(f"Se encontraron {len(resultado)} país(es) con población entre {min_pop} y {max_pop}:")
-        for p in resultado:
-            print(f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}")
-
+        resultado = f"Se encontraron {len(paises_filtrados)} país(es) con población entre {min_pop} y {max_pop}:\n"
+        for p in paises_filtrados:
+            resultado += f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}\n"
     return resultado
 
 #Filtrar paises por superficie;
 
-def filtrar_por_superficie(paises, min_area=0, max_area=-1):
-    resultado = []
+def filtrar_por_superficie(paises, min_area, max_area):
+    min_area = int(min_area)
+    max_area = int(max_area)
+    paises_filtrados = []
+    resultado = ''
+    
+    if max_area < min_area:
+        min_area, max_area = max_area, min_area
+    
     for pais in paises:
         superficie = pais.get("superficie")
         #Garantizar que el valor sea numerico y valido
@@ -73,14 +86,14 @@ def filtrar_por_superficie(paises, min_area=0, max_area=-1):
             continue
         superficie = int(superficie)
 
-        if (superficie >= min_area) and (max_area == -1 or superficie <= max_area):
-            resultado.append(pais)
+        if min_area <= superficie <= max_area:
+            paises_filtrados.append(pais)
 
-    if not resultado:
-        print(f"No se encontraron países con superficie entre {min_area} y {max_area}.")
+    if not paises_filtrados:
+        resultado = f"No se encontraron países con superficie entre {min_area} y {max_area}."
     else:
-        print(f"Se encontraron {len(resultado)} país(es) con superficie entre {min_area} y {max_area}:")
-        for p in resultado:
-            print(f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}")
+        resultado = f"Se encontraron {len(paises_filtrados)} país(es) con superficie entre {min_area} y {max_area}:\n"
+        for p in paises_filtrados:
+            resultado += f"- {p['nombre']}; Superficie: {p['superficie']} km²; Población: {p['poblacion']}; Continente: {p['continente']}\n"
 
     return resultado
