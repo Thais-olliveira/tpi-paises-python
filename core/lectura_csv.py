@@ -1,10 +1,15 @@
 import csv
-def cargar_paises(ruta: str) -> list[dict]:
-    ruta = "data/paises_dataset.csv"
+import os
 
+def cargar_paises():
+    ruta_csv = "data/paises_dataset.csv"
     paises = []
 
-    with open(ruta, newline="", encoding="utf-8") as f:
+    if not os.path.exists(ruta_csv):
+        print("El archivo CSV no existe")
+        return paises
+
+    with open(ruta_csv, newline="", encoding="utf-8") as f:
         lector = csv.reader(f)
         columnas = next(lector)
         columnas = [i.lower().strip() for i in columnas]

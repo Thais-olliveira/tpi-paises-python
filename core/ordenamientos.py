@@ -1,5 +1,5 @@
 #Ordenar os paises (nombre, poblacion, superficie(ascendente o descendente)
-#Ordenamiento borbuja - Por nombre
+
 def ordenar_por_nombre(paises):
     cantidad_paises = len(paises)
     
@@ -50,15 +50,14 @@ def ordenar_por_poblacion(paises):
 
     return paises_validos
 
-#Ordenamiento borbuja - Por superficie
+#Ordenamiento borbuja - Por superficie ascendente
 
-def ordenar_por_superficie(paises):
+def ordenar_por_superficie_ascendente(paises):
     paises_validos = []
     for pais in paises:
         superficie = pais.get("superficie")
         if superficie is None or not str(superficie).isdigit():
             continue
-        #Hace una copia del diccionario original
         pais_copia = dict(pais)
         pais_copia["superficie"] = int(superficie)
         paises_validos.append(pais_copia)
@@ -78,5 +77,35 @@ def ordenar_por_superficie(paises):
     print("Países ordenados por superficie (menor → mayor):\n")
     for pais in paises_validos:
         print(f"- {pais['nombre']}; Superficie: {pais['superficie']} km²; "f"Población: {pais['poblacion']}; Continente: {pais['continente']}")
+
+    return paises_validos
+
+#Ordenamiento borbuja - Por superficie descendente
+def ordenar_por_superficie_descendente(paises):
+    paises_validos = []
+
+    for pais in paises:
+        superficie = pais.get("superficie")
+        if superficie is None or not str(superficie).isdigit():
+            continue
+        pais_copia = dict(pais)
+        pais_copia["superficie"] = int(superficie)
+        paises_validos.append(pais_copia)
+
+    cantidad_paises = len(paises_validos)
+
+    for i in range(cantidad_paises - 1):
+        for indice_actual in range(cantidad_paises - i - 1):
+            area_actual = paises_validos[indice_actual]["superficie"]
+            area_siguiente = paises_validos[indice_actual + 1]["superficie"]
+            
+            if area_actual < area_siguiente:
+                paises_validos[indice_actual], paises_validos[indice_actual + 1] = \
+                    paises_validos[indice_actual + 1], paises_validos[indice_actual]
+
+    print("Países ordenados por superficie (mayor → menor):\n")
+    for pais in paises_validos:
+        print(f"- {pais['nombre']}; Superficie: {pais['superficie']} km²; "
+            f"Población: {pais['poblacion']}; Continente: {pais['continente']}")
 
     return paises_validos
