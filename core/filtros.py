@@ -5,7 +5,7 @@ def validar_nombre(nombre):
     Validación que el nombre ingresado no sea vacio
     """
     if not nombre.strip():
-        print("El nombre no puede estar vacío")
+        print("El nombre del pais no puede estar vacío. Intenta nuevamente.")
         return None
     return nombre.strip()
 
@@ -82,6 +82,38 @@ def reescribir_archivo(ruta_csv: str, paises: list):
         escritor = csv.DictWriter(archivo, fieldnames=campos)
         escritor.writeheader()
         escritor.writerows(paises)
+        
+        
+def elegir_continente_desde_lista():
+    Continentes_disponibles = [
+    "África",
+    "América del Norte",
+    "América del Sur",
+    "Asia",
+    "Europa",
+    "Oceanía",
+    "Antártida",
+]
+    while True:
+        print("\n--- Selección de continente ---")
+        for i, cont in enumerate(Continentes_disponibles, start=1):
+            print(f"{i}. {cont}")
+        print("0. Cancelar")
+
+        opcion = input("Elija una opción: ").strip()
+
+        if opcion == "0":
+            print("Operación cancelada.")
+            return None
+
+        if opcion.isdigit():
+            indice = int(opcion)
+            if 1 <= indice <= len(Continentes_disponibles):
+                continente = Continentes_disponibles[indice - 1]
+                print(f"Has elegido: {continente}")
+                return continente
+
+        print("Opción inválida. Intente nuevamente.")
 
 #Agregar un nuevo país
 
@@ -106,7 +138,7 @@ def agregar_pais(ruta_csv: str):
     if poblacion is None:
         return
     
-    continente = validar_continente(input("Continente: "))
+    continente = elegir_continente_desde_lista()
     if continente is None:
         return
 
@@ -184,9 +216,12 @@ def filtrar_por_continente(paises, continente):
     paises_filtrados = []
     resultado = ''
     
+    if not continente:
+        return "No ingresaste ningún continente. Intenta nuevamente."
+    
     for pais in paises:
         cont = pais.get("continente").lower()
-        if continente in cont:
+        if continente == cont:
             paises_filtrados.append(pais)
 
     if not paises_filtrados:

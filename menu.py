@@ -3,7 +3,36 @@ import core.filtros
 import core.estadisticas
 import core.ordenamientos
 
+
 RUTA_CSV = "data/paises_dataset.csv"
+
+def submenu_ordenamientos(paises):
+    while True:
+        print("\n---- ORDENAMIENTOS ----")
+        print("1. Ordenar por nombre (A-Z)")
+        print("2. Ordenar por población (menor a mayor)")
+        print("3. Ordenar por superficie ascendente (menor a mayor)")
+        print("4. Ordenar por superficie descendente (mayor a menor)")
+        print("5. Volver al menú principal")
+
+        opcion = input("Seleccione una opción: ").strip()
+
+        if opcion == "1":
+            core.ordenamientos.ordenar_por_nombre(paises)
+        
+        elif opcion == "2":
+            core.ordenamientos.ordenar_por_poblacion(paises)
+
+        elif opcion == "3":
+            core.ordenamientos.ordenar_por_superficie_ascendente(paises)
+        
+        elif opcion == "4":
+            core.ordenamientos.ordenar_por_superficie_descendente(paises)
+
+        elif opcion == "5":
+            break
+        else:
+            print("Opción inválida.")
 
 def menu():
     paises = core.lectura_csv.cargar_paises()
@@ -38,8 +67,9 @@ def menu():
             core.filtros.buscar_por_nombre(paises)
 
         elif opcion == '4':
-            cont = input("Ingrese el continente: ")
-            print(core.filtros.filtrar_por_continente(paises, cont))
+            continente = core.filtros.elegir_continente_desde_lista()
+            if continente is not None:
+                print(core.filtros.filtrar_por_continente(paises, continente))
 
         elif opcion == '5':
             min_pop = input("Población mínima: ")
@@ -62,38 +92,12 @@ def menu():
             submenu_ordenamientos(paises)
             
         elif opcion == '9':
-          print("Saliendo del programa... ")
-          break
+            print("Saliendo del programa... ")
+            break
 
         else:
             print("Opción inválida. Intente de nuevo.")
+            
+menu()
 
-def submenu_ordenamientos(paises):
-    while True:
-        print("\n---- ORDENAMIENTOS ----")
-        print("1. Ordenar por nombre (A-Z)")
-        print("2. Ordenar por población (menor a mayor)")
-        print("3. Ordenar por superficie ascendente (menor a mayor)")
-        print("4. Ordenar por superficie descendente (mayor a menor)")
-        print("5. Volver al menú principal")
 
-        opcion = input("Seleccione una opción: ").strip()
-
-        if opcion == "1":
-            core.ordenamientos.ordenar_por_nombre(paises)
-        
-        elif opcion == "2":
-           core.ordenamientos.ordenar_por_poblacion(paises)
-
-        elif opcion == "3":
-           core.ordenamientos.ordenar_por_superficie_ascendente(paises)
-        
-        elif opcion == "4":
-           core.ordenamientos.ordenar_por_superficie_descendente(paises)
-
-        elif opcion == "5":
-          break
-        else:
-            print("Opción inválida.")
-
-    menu()

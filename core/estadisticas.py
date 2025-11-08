@@ -2,7 +2,7 @@
 # cantidad de paises por continente)
 
 #País con mayor y menor población
-def mayor_menor_población (paises):
+def mayor_menor_poblacion (paises):
     paises_validos = []
     
     for pais in paises:

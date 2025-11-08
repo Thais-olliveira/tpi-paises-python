@@ -1,6 +1,6 @@
 Trabajo Práctico Integrador - Gestión de Datos de Países en Python
 Programación I
-Alumnas: Thais Alvin / Constanza Jazmín Jimenez
+Alumnas: Thais Alvim / Constanza Jazmín Jimenez
 
 Este proyecto permite gestionar información sobre países a partir de un archivo CSV con datos como nombre, superficie, población y continente.
 
