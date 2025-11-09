@@ -30,8 +30,8 @@ def mayor_menor_poblacion (paises):
     menor = paises_validos[0]
     mayor = paises_validos[-1]
     
-    print("País con menor populación:", menor["nombre"], "-", menor["poblacion"])
-    print("País con mayor populación:", mayor["nombre"], "-", mayor["poblacion"])
+    print("País con menor población:", menor["nombre"], "-", menor["poblacion"])
+    print("País con mayor población:", mayor["nombre"], "-", mayor["poblacion"])
     
 #Promedio de poblacion
 def promedio_poblacion(paises):
