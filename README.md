@@ -1,4 +1,4 @@
-##<em>Trabajo Práctico Integrador - Gestión de Datos de Países en Python</em>
+## Trabajo Práctico Integrador - Gestión de Datos de Países en Python
 
 **Programación I – Comisión 14**  
 **Alumnas:** Thais Alvim / Constanza Jazmín Jiménez  
