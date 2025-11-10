@@ -28,6 +28,7 @@ La ejecución del programa se da en tres pasos: primero se asegura que el archiv
 
 [Diagrama de flujo general del sistema](diagramadeflujo.jpeg)
 
+[Documentación Teórica del Proyecto](TPI-ProgramaciónI-Grupo84-Thaís-Constanza.pdf)
 
 ## 🧠 Ejemplo de entradas y salidas 
 
